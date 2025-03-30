@@ -1,0 +1,54 @@
+{
+  "database": {
+    "url": null,
+    "pool_size": 20,
+    "max_overflow": 30,
+    "echo": false,
+    "echo_pool": false,
+    "pool_recycle": 3600,
+    "pool_pre_ping": true,
+    "connect_timeout": 30
+  },
+  "cache": {
+    "ttl": 3600,
+    "namespace": "esda-cache",
+    "key_prefix": "prod:",
+    "serializer": "json",
+    "compression": true
+  },
+  "logging": {
+    "level": "WARNING",
+    "format": "json",
+    "file": "logs/app.log",
+    "rotation": "100 MB",
+    "retention": "1 month",
+    "compression": "gz",
+    "backtrace": true,
+    "diagnose": false,
+    "structured": true,
+    "enrich": ["process", "thread", "module"]
+  },
+  "security": {
+    "jwt_algorithm": "HS256",
+    "access_token_expire_minutes": 15,
+    "refresh_token_expire_days": 7,
+    "password_bcrypt_rounds": 12,
+    "cors_origins": ["https://example.com"],
+    "cors_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "cors_headers": ["*"],
+    "rate_limit_requests": 100,
+    "rate_limit_period": 60
+  },
+  "api": {
+    "prefix": "/api/v1",
+    "title": "ESDA Web Mapping API",
+    "description": "API for serving geospatial data and analysis results.",
+    "version": "0.1.0",
+    "docs_url": "/docs",
+    "redoc_url": "/redoc",
+    "openapi_url": "/openapi.json",
+    "root_path": "",
+    "debug": false,
+    "reload": false
+  }
+}

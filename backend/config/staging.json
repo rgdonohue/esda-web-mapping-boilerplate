@@ -1,0 +1,54 @@
+{
+  "database": {
+    "url": null,
+    "pool_size": 10,
+    "max_overflow": 20,
+    "echo": false,
+    "echo_pool": false,
+    "pool_recycle": 3600,
+    "pool_pre_ping": true,
+    "connect_timeout": 30
+  },
+  "cache": {
+    "ttl": 1800,
+    "namespace": "esda-cache-staging",
+    "key_prefix": "staging:",
+    "serializer": "json",
+    "compression": true
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "json",
+    "file": "logs/app-staging.log",
+    "rotation": "50 MB",
+    "retention": "2 weeks",
+    "compression": "gz",
+    "backtrace": true,
+    "diagnose": true,
+    "structured": true,
+    "enrich": ["process", "thread", "module"]
+  },
+  "security": {
+    "jwt_algorithm": "HS256",
+    "access_token_expire_minutes": 30,
+    "refresh_token_expire_days": 7,
+    "password_bcrypt_rounds": 10,
+    "cors_origins": ["https://staging.example.com", "http://localhost:3000"],
+    "cors_methods": ["*"],
+    "cors_headers": ["*"],
+    "rate_limit_requests": 200,
+    "rate_limit_period": 60
+  },
+  "api": {
+    "prefix": "/api/v1",
+    "title": "ESDA Web Mapping API (Staging)",
+    "description": "Staging version of the API for serving geospatial data and analysis results.",
+    "version": "0.1.0",
+    "docs_url": "/docs",
+    "redoc_url": "/redoc",
+    "openapi_url": "/openapi.json",
+    "root_path": "",
+    "debug": false,
+    "reload": false
+  }
+}
