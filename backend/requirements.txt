@@ -13,3 +13,6 @@ fastapi-cache2>=0.2.1
 # Added for logging
 python-json-logger>=2.0.7
 loguru>=0.7.2
+# Added for OGC Web Services
+owslib>=0.33.0
+pyproj>=3.6.0

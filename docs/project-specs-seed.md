@@ -1,4 +1,4 @@
-# Revised Project Boilerplate Generation Request (v2.0)
+# Project Boilerplate Generation Request (v2.0)
 
 **Goal:**  
 Generate the initial directory structure and essential boilerplate files for a web application focused on Exploratory Spatial Data Analysis (ESDA) and Web Cartography—with improvements for scalability, integration testing, CI/CD, and unified environment management.
