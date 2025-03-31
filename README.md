@@ -1,7 +1,7 @@
 # ESDA Web Mapping Boilerplate
 
 <p align="center">
-  <img src="docs/assets/logo.png" alt="ESDA Web Mapping Logo" width="200"/>
+  <img src="docs/assets/logo.png" alt="ESDA Web Mapping Logo" width="960"/>
 </p>
 
 <p align="center">
