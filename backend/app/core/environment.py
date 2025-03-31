@@ -1,8 +1,10 @@
 from enum import Enum
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
+
 
 class Environment(str, Enum):
     """Enum for different deployment environments"""
+
     DEVELOPMENT = "development"
     TESTING = "testing"
     PRODUCTION = "production"
@@ -28,7 +30,7 @@ class Environment(str, Enum):
                 "reload": False,
                 "log_level": "WARNING",
                 "cache_ttl": 3600,  # Longer cache time for production
-            }
+            },
         }
-        
+
         return env_settings.get(env, env_settings[cls.DEVELOPMENT])

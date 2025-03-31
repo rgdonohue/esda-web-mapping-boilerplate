@@ -1,287 +1,145 @@
-# ESDA Web Mapping Project
+# ESDA Web Mapping Boilerplate
 
-A comprehensive web application focused on Exploratory Spatial Data Analysis (ESDA) and Web Cartography. This project combines a Python-based FastAPI backend for geospatial data processing with a Next.js frontend for interactive web mapping and visualization.
+<p align="center">
+  <img src="docs/assets/logo.png" alt="ESDA Web Mapping Logo" width="200"/>
+</p>
 
-## Project Overview
+<p align="center">
+  <strong>Modern Spatial Data Analysis Made Beautiful</strong>
+</p>
 
-This project provides a scalable architecture for spatial data analysis and visualization with the following key features:
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#examples">Examples</a> •
+  <a href="#contributing">Contributing</a>
+</p>
 
-- **Backend API**: FastAPI-powered RESTful API for geospatial data processing and analysis
-- **Frontend Application**: Modern Next.js application with interactive mapping capabilities
-- **Data Processing Pipeline**: Tools for data acquisition, cleaning, and transformation
-- **Visualization Components**: Interactive web maps using modern cartography libraries
-- **Optional GUI Component**: Python-driven GUI using Streamlit for additional analysis capabilities
-- **Environment Configuration System**: Flexible configuration system with environment-specific settings
-- **Enhanced Logging Infrastructure**: Structured logging with rotation and multiple outputs
-- **Geospatial Utilities**: Comprehensive geospatial data validation and processing tools
+## 🌟 Overview
 
-## Core Technologies
+ESDA Web Mapping Boilerplate is a powerful, modern framework for building sophisticated spatial data analysis applications. It combines the robustness of exploratory spatial data analysis (ESDA) with an elegant, user-friendly interface, making complex spatial analysis accessible and beautiful.
 
-### Backend
-- **Python** with **FastAPI** as the primary API framework
-- **Streamlit** for optional GUI components
-- **GeoPandas**, **Pandas**, **Shapely** for geospatial data processing
-- **SQLAlchemy/psycopg2** for database interactions (if configured)
+## ✨ Features
 
-### Frontend
-- **Next.js** with **TypeScript** for the web application
-- **Leaflet**, **Mapbox GL JS**, or **Deck.gl** for interactive map rendering
-- **Tailwind CSS** for styling
+### 🗺️ Advanced Mapping Capabilities
+- **Multi-Library Support**: Seamless integration with OpenLayers, Leaflet, and MapLibre
+- **Interactive Visualization**: Dynamic styling, clustering, and animations
+- **Custom Controls**: Intuitive layer management and analysis tools
 
-### Data Handling
-- **Jupyter Notebooks** for exploratory analysis
-- **GeoPandas** and **Pandas** for data manipulation
-- **Requests** and **BeautifulSoup** for data acquisition
+### 📊 Sophisticated Spatial Analysis
+- **Network Analysis**: Calculate network metrics and topology statistics
+- **Pattern Analysis**: Quadrat analysis, Nearest Neighbor, Ripley's K
+- **Geostatistics**: Spatial autocorrelation, variography, kriging
+- **Spatial Regression**: OLS, GWR, spatial lag and error models
+- **Interpolation**: IDW, kriging, and spline methods
 
-## Project Structure
+### 🛠️ Developer Experience
+- **Modern Stack**: FastAPI backend + React frontend
+- **Type Safety**: Full TypeScript support
+- **API Documentation**: Auto-generated OpenAPI docs
+- **Hot Reloading**: Fast development cycle
 
-```
-/
-├── backend/             # FastAPI backend & Python GUI components
-│   ├── app/             # Core application code
-│   │   ├── api/         # API endpoint definitions
-│   │   ├── core/        # Configuration and core logic
-│   │   ├── db/          # Database interaction (models, sessions)
-│   │   ├── models/      # Pydantic schemas/models
-│   │   ├── services/    # Business logic services
-│   │   └── utils/       # Shared backend utilities
-│   ├── gui/             # Python-driven GUI components/app
-│   ├── tests/           # Unit tests for backend
-│   ├── main.py          # FastAPI app entry point
-│   └── requirements.txt # Backend dependencies
-├── frontend/            # Next.js frontend application
-│   ├── src/             # Source code (with App Router, components, lib, styles)
-│   ├── public/          # Static assets
-│   ├── tests/           # Frontend tests
-│   ├── package.json     # Frontend dependencies
-│   └── tsconfig.json    # TypeScript configuration
-├── data/                # Data processing and analysis
-│   ├── notebooks/       # Jupyter notebooks for ESDA
-│   ├── data_processing/ # Scripts for scraping, cleaning, transformation
-│   ├── raw/             # Raw data (gitignored)
-│   ├── processed/       # Processed data
-│   ├── utils/           # Shared data utilities
-│   └── requirements.txt # Data task dependencies
-├── docs/                # Project documentation
-│   ├── architecture.md  # High-level design and diagrams
-│   ├── setup_guide.md   # Detailed setup instructions
-│   ├── api_reference.md # API documentation
-│   ├── CODE_OF_CONDUCT.md
-│   └── LICENSE
-├── scripts/             # Helper scripts (dev, test, build)
-├── tests/               # Integration and end-to-end tests
-├── .env.example         # Centralized environment variable documentation
-├── .gitignore           # Git ignore rules
-├── docker-compose.yml   # Container orchestration
-├── Makefile             # Common tasks
-└── .pre-commit-config.yaml # Pre-commit hook configuration
-```
+### 🎨 Beautiful UI/UX
+- **Modern Design**: Clean, intuitive interface
+- **Responsive**: Works on all devices
+- **Customizable**: Themeable components
+- **Accessibility**: WCAG 2.1 compliant
 
-## Setup Instructions
+## 🚀 Quick Start
 
 ### Prerequisites
+- Python 3.8+
+- Node.js 16+
+- Make (usually pre-installed on Unix systems)
+- GDAL and spatial libraries (see [detailed setup guide](docs/setup_guide.md))
 
-- Python 3.8+ for backend and data processing
-- Node.js 16+ for frontend development
-- GDAL and other geospatial libraries (see detailed setup in `docs/setup_guide.md`)
-- PostgreSQL with PostGIS extension (optional, for spatial database functionality)
-
-### Installation
-
-> **Note:** This is a template project. No dependencies are pre-installed, and you will need to install them as described below.
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd esda-webmapping-project
-   ```
-
-2. **Set up environment variables**
-
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-3. **Install backend dependencies**
-
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   cd ..
-   ```
-
-4. **Install data processing dependencies**
-
-   ```bash
-   cd data
-   pip install -r requirements.txt
-   cd ..
-   ```
-
-5. **Install frontend dependencies** (required)
-
-   ```bash
-   cd frontend
-   npm install  # This step is required as node_modules are not included in the template
-   cd ..
-   ```
-
-### Running the Application
-
-#### Using helper scripts
+### Setup
 
 ```bash
-# Start development servers (backend and frontend)
-./scripts/run_dev.sh
+# Clone the repository
+git clone https://github.com/yourusername/esda-web-mapping-boilerplate.git
+cd esda-web-mapping-boilerplate
 
-# Run all tests
-./scripts/run_tests.sh
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env with your preferred settings
 
-# Build the project for production
-./scripts/build_project.sh
+# Install all dependencies and set up development environment
+make setup
+
+# Start development environment (both backend and frontend)
+make dev
 ```
 
-#### Manual startup
+### Alternative: Manual Setup
 
-**Backend API:**
-
-```bash
-cd backend
-uvicorn app.main:app --reload --port 8000
-```
-
-**Frontend:**
+If you prefer more control over the installation process:
 
 ```bash
+# Backend setup
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+pip install -r requirements-dev.txt  # Development dependencies
+
+# Frontend setup
 cd frontend
-npm run dev
+npm install
+cd ..
+
+# Start services individually
+./scripts/run_backend.sh  # Starts FastAPI server
+./scripts/run_frontend.sh # Starts React development server
 ```
 
-**GUI Component (optional):**
+### Verify Installation
 
-```bash
-cd backend
-streamlit run gui/main_gui.py
-```
+Once running, you can access:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
 
-**Jupyter Notebooks:**
+For detailed setup instructions, troubleshooting, and configuration options, see our [Setup Guide](docs/setup_guide.md).
 
-```bash
-cd data
-jupyter lab
-```
+## 📚 Documentation
 
-## Development Workflow
+Visit our [documentation](docs/README.md) to learn more about:
+- [Architecture Overview](docs/architecture.md)
+- [API Reference](docs/api-reference.md)
+- [Component Library](docs/components.md)
+- [Spatial Analysis Guide](docs/spatial-analysis.md)
+- [Deployment Guide](docs/deployment.md)
 
-### Code Quality and Standards
+## 🎯 Examples
 
-This project uses pre-commit hooks to enforce code quality standards. Install them with:
+Check out our [examples directory](examples/) for:
+- Basic map setup
+- Custom layer styling
+- Spatial analysis workflows
+- Network analysis
+- Advanced visualizations
 
-```bash
-pip install pre-commit
-pre-commit install
-```
+## 🤝 Contributing
 
-### Testing
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-- **Backend unit tests:** `cd backend && pytest`
-- **Frontend tests:** `cd frontend && npm test`
-- **Integration tests:** `cd tests && pytest`
+## 📄 License
 
-### API Documentation
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Once the backend server is running, access the auto-generated API documentation at:
+## 🙏 Acknowledgments
 
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+Built with love using:
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [React](https://reactjs.org/)
+- [OpenLayers](https://openlayers.org/)
+- [Leaflet](https://leafletjs.com/)
+- [MapLibre GL JS](https://maplibre.org/)
+- [D3.js](https://d3js.org/)
 
-## Deployment
+---
 
-### Using Docker
-
-The project includes Docker configuration for containerized deployment:
-
-```bash
-docker-compose up -d
-```
-
-See `docker-compose.yml` for details on the containerized setup.
-
-### Manual Deployment
-
-For manual deployment instructions, refer to `docs/setup_guide.md`.
-
-## Contributing
-
-Please read `docs/CODE_OF_CONDUCT.md` for details on our code of conduct and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the terms specified in the `docs/LICENSE` file.
-
-## Additional Resources
-
-- For detailed architecture information, see `docs/architecture.md`
-- For API reference documentation, see `docs/api_reference.md`
-- For troubleshooting and detailed setup instructions, see `docs/setup_guide.md`
-
-## Key Features
-
-### Environment Configuration System
-
-The project includes a flexible environment configuration system that supports different deployment environments:
-
-- **Environment-Specific Settings**: Configuration files for development, testing, staging, and production environments
-- **JSON Configuration Files**: Located in `backend/config/` directory with environment-specific settings
-- **Environment Variables**: Override configuration via `.env` file or system environment variables
-- **Hierarchical Configuration**: Settings are loaded from files, then environment variables, with sensible defaults
-
-```python
-# Example of accessing configuration in code
-from app.core.environment_config import EnvironmentConfig
-
-# Get database settings for current environment
-db_settings = EnvironmentConfig.get_database_settings()
-```
-
-### Enhanced Logging Infrastructure
-
-The project includes a comprehensive logging system with the following features:
-
-- **Structured Logging**: JSON-formatted logs for better parsing and analysis
-- **Multiple Outputs**: Console and file logging with different configurations
-- **Log Rotation**: Size-based or time-based log rotation to manage log files
-- **Environment-Aware**: Different log levels based on the environment (DEBUG for development, WARNING for production)
-- **Contextual Information**: Automatic enrichment of logs with process, thread, and module information
-
-```python
-# Example of using the logger in code
-from app.utils.enhanced_logging import get_logger
-
-logger = get_logger(__name__)
-logger.info("Processing data", extra={"data_size": 1024, "format": "GeoJSON"})
-```
-
-### Geospatial Utilities
-
-The project provides a comprehensive set of geospatial utilities for working with geographic data:
-
-- **GeoJSON Validation**: Pydantic models for validating GeoJSON objects
-- **Spatial Operations**: Functions for distance calculations, buffering, and bounding box operations
-- **Coordinate Transformations**: Utilities for converting between coordinate systems
-- **Geometry Simplification**: Tools for simplifying complex geometries
-- **Spatial Queries**: Support for spatial filtering and proximity searches
-
-```python
-# Example of using geospatial utilities
-from app.utils.geospatial import haversine_distance, DistanceUnit
-
-# Calculate distance between two points
-distance = haversine_distance(
-    point1=(longitude1, latitude1),
-    point2=(longitude2, latitude2),
-    unit=DistanceUnit.KILOMETERS
-)
-```
+<p align="center">
+  Made with ❤️ for the spatial analysis community
+</p>

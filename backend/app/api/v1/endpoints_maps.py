@@ -1,11 +1,13 @@
+from typing import Any, Dict
+
 from fastapi import APIRouter, HTTPException, Request
-from typing import Dict, Any
 
 from app.utils.cache import cached
 from app.utils.logging import get_logger
 
 router = APIRouter()
 logger = get_logger(__name__)
+
 
 @router.get("/basemap", response_model=Dict[str, Any])
 @cached(namespace="maps")
@@ -17,7 +19,7 @@ async def get_basemap_config(request: Request):
             "type": "mapbox",
             "style": "mapbox://styles/mapbox/light-v10",
             "center": [-73.935242, 40.730610],  # Default: New York City
-            "zoom": 12
+            "zoom": 12,
         }
         logger.debug(f"Basemap config retrieved: {config}")
         return config

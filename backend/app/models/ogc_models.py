@@ -1,12 +1,14 @@
-from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Literal, Union, Optional
 from enum import Enum
+from typing import Any, Dict, List, Literal, Optional, Union
+
+from pydantic import BaseModel, Field
 
 from app.models.geojson_models import GeoJSONFeature, GeoJSONFeatureCollection
 
 
 class OGCServiceType(str, Enum):
     """OGC Service Types"""
+
     WMS = "WMS"
     WFS = "WFS"
     WCS = "WCS"
@@ -14,12 +16,14 @@ class OGCServiceType(str, Enum):
 
 class OGCVersion(str, Enum):
     """Supported OGC Service Versions"""
+
     WMS_1_3_0 = "1.3.0"
     WFS_2_0_0 = "2.0.0"
 
 
 class WMSGetCapabilitiesResponse(BaseModel):
     """Model for WMS GetCapabilities response"""
+
     service: Literal["WMS"] = "WMS"
     version: str
     layers: List[Dict[str, Any]]
@@ -30,6 +34,7 @@ class WMSGetCapabilitiesResponse(BaseModel):
 
 class WMSGetMapRequest(BaseModel):
     """Model for WMS GetMap request parameters"""
+
     service: Literal["WMS"] = "WMS"
     version: str = Field("1.3.0", description="WMS version")
     layers: str = Field(..., description="Comma-separated list of layer names")
@@ -44,6 +49,7 @@ class WMSGetMapRequest(BaseModel):
 
 class WFSGetCapabilitiesResponse(BaseModel):
     """Model for WFS GetCapabilities response"""
+
     service: Literal["WFS"] = "WFS"
     version: str
     feature_types: List[Dict[str, Any]]
@@ -54,6 +60,7 @@ class WFSGetCapabilitiesResponse(BaseModel):
 
 class WFSGetFeatureRequest(BaseModel):
     """Model for WFS GetFeature request parameters"""
+
     service: Literal["WFS"] = "WFS"
     version: str = Field("2.0.0", description="WFS version")
     type_names: str = Field(..., description="Comma-separated list of feature type names")
@@ -65,15 +72,19 @@ class WFSGetFeatureRequest(BaseModel):
 
 class WFSTransactionRequest(BaseModel):
     """Model for WFS Transaction request"""
+
     service: Literal["WFS"] = "WFS"
     version: str = Field("2.0.0", description="WFS version")
     operation: str = Field(..., description="Transaction operation: Insert, Update, Delete")
     type_name: str = Field(..., description="Feature type name")
-    features: Union[GeoJSONFeature, List[GeoJSONFeature]] = Field(..., description="Features to process")
+    features: Union[GeoJSONFeature, List[GeoJSONFeature]] = Field(
+        ..., description="Features to process"
+    )
 
 
 class OGCException(BaseModel):
     """Model for OGC Exception response"""
+
     exception_code: str
     exception_text: str
     locator: Optional[str] = None

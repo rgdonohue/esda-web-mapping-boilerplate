@@ -1,10 +1,8 @@
 from typing import AsyncGenerator
-from sqlalchemy.ext.asyncio import (
-    AsyncSession,
-    create_async_engine,
-    async_sessionmaker
-)
+
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import AsyncAdaptedQueuePool
+
 from app.core.config import settings
 from app.core.exceptions import DatabaseError
 
@@ -17,17 +15,14 @@ engine = create_async_engine(
     pool_recycle=settings.DB_POOL_RECYCLE,
     pool_pre_ping=settings.DB_POOL_PRE_PING,
     echo=settings.ENVIRONMENT == "development",
-    future=True
+    future=True,
 )
 
 # Create async session factory
 AsyncSessionLocal = async_sessionmaker(
-    engine,
-    class_=AsyncSession,
-    expire_on_commit=False,
-    autocommit=False,
-    autoflush=False
+    engine, class_=AsyncSession, expire_on_commit=False, autocommit=False, autoflush=False
 )
+
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """Get database session."""
@@ -40,16 +35,19 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
         finally:
             await session.close()
 
+
 async def init_db() -> None:
     """Initialize database."""
     try:
         # Create database tables
         from app.db.base import Base
+
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
     except Exception as e:
         raise DatabaseError(f"Failed to initialize database: {str(e)}")
 
+
 async def close_db() -> None:
     """Close database connections."""
-    await engine.dispose() 
+    await engine.dispose()

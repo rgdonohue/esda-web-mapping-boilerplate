@@ -1,18 +1,21 @@
+import logging.config
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
-import logging.config
+
 from app.core.config import settings
 from app.core.middleware import (
     ErrorHandlingMiddleware,
-    RequestValidationMiddleware,
+    LoggingMiddleware,
     RateLimitMiddleware,
-    LoggingMiddleware
+    RequestValidationMiddleware,
 )
 
 # Configure logging
 logging.config.dictConfig(settings.get_logging_config())
 logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,6 +26,7 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down application...")
     # Cleanup resources
 
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="API for serving geospatial data and analysis results.",
@@ -30,7 +34,7 @@ app = FastAPI(
     lifespan=lifespan,
     docs_url=f"{settings.API_V1_STR}/docs",
     redoc_url=f"{settings.API_V1_STR}/redoc",
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
 
 # Add middleware
@@ -48,15 +52,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Health check endpoint
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
-    return {
-        "status": "healthy",
-        "version": "0.1.0",
-        "environment": settings.ENVIRONMENT
-    }
+    return {"status": "healthy", "version": "0.1.0", "environment": settings.ENVIRONMENT}
+
 
 # Include routers
 # app.include_router(auth_router, prefix=f"{settings.API_V1_STR}/auth", tags=["auth"])
